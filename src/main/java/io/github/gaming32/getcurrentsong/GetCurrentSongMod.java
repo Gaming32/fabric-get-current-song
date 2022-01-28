@@ -1,26 +1,29 @@
 package io.github.gaming32.getcurrentsong;
 
-import net.fabricmc.api.ModInitializer;
+import com.mojang.brigadier.context.CommandContext;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 
 public class GetCurrentSongMod implements ModInitializer {
+	public static final Logger LOGGER = LoggerFactory.getLogger("getcurrentsong");
 
-    public static Logger LOGGER = LogManager.getLogger();
+	@Override
+	public void onInitialize() {
+		LOGGER.info("Initializing...");
+        ClientCommandManager.DISPATCHER.register(
+            ClientCommandManager.literal("getsong")
+                .executes(this::getCurrentSongCommandExecutor)
+        );
+        LOGGER.info("Initialized");
+	}
 
-    public static final String MOD_ID = "getcurrentsong";
-    public static final String MOD_NAME = "Get Current Song";
-
-    @Override
-    public void onInitialize() {
-        log(Level.INFO, "Initializing");
-        //TODO: Initializer
+    private int getCurrentSongCommandExecutor(CommandContext<FabricClientCommandSource> context) {
+        LOGGER.info("getsong run");
+        return 0;
     }
-
-    public static void log(Level level, String message){
-        LOGGER.log(level, "["+MOD_NAME+"] " + message);
-    }
-
 }
