@@ -32,10 +32,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 
 public class GetCurrentSongMod implements ModInitializer {
-	public static final Logger LOGGER = LoggerFactory.getLogger("getcurrentsong");
+    public static final Logger LOGGER = LoggerFactory.getLogger("getcurrentsong");
 
-	@Override
-	public void onInitialize() {
+    @Override
+    public void onInitialize() {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
             private static final Identifier FABRIC_ID = new Identifier("getcurrentsong", "song_names");
             private static final Identifier SONG_NAMES_JSON = new Identifier("getcurrentsong", "song_names.json");
@@ -97,7 +97,7 @@ public class GetCurrentSongMod implements ModInitializer {
                 })
         );
         LOGGER.info("Initialized");
-	}
+    }
 
     private MusicTracker getMusicTracker(CommandContext<FabricClientCommandSource> context) {
         return context.getSource().getClient().getMusicTracker();
