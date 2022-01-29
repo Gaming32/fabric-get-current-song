@@ -170,7 +170,7 @@
     },
 
     "minecraft:music/game/end/boss": {
-        "name": "The End",
+        "name": "Boss",
         "composer": "C418"
     },
 

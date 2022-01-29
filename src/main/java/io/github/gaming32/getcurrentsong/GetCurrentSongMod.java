@@ -27,6 +27,7 @@ import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
@@ -92,7 +93,9 @@ public class GetCurrentSongMod implements ModInitializer {
             ClientCommandManager.literal("forceplaysong")
                 .executes(context -> {
                     MusicTracker musicTracker = getMusicTracker(context);
-                    musicTracker.play(context.getSource().getClient().getMusicType());
+                    MusicSound musicSound = context.getSource().getClient().getMusicType();
+                    musicTracker.play(musicSound);
+                    context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().getId()));
                     return 0;
                 })
         );
