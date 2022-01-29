@@ -1,21 +1,21 @@
-#Gradle
+# Gradle
 .gradle/
 build/
 out/
 classes/
 
-#IDEA
+# IDEA
 .idea/
 *.iml
 *.ipr
 *.iws
 
-#vscode
+# VS Code
 .settings/
 .vscode/
-bin/
-.classpath
-.project
 
-#fabric
+# Fabric
 run/
+
+# Java
+hs_err_pid*.log
