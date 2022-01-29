@@ -13,6 +13,7 @@ classes/
 # VS Code
 .settings/
 .vscode/
+bin/
 
 # Fabric
 run/
