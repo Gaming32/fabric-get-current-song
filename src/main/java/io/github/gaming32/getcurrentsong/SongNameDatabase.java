@@ -112,11 +112,11 @@ public final class SongNameDatabase {
         return initialized;
     }
 
-    public static SongInfo getSong(Identifier id) {
+    public static @Nullable SongInfo getSong(Identifier id) {
         return SONGS.get(id);
     }
 
-    public static SongInfo getSong(String id) {
+    public static @Nullable SongInfo getSong(String id) {
         return SONGS.get(new Identifier(id));
     }
 }
