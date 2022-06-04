@@ -218,6 +218,12 @@
         "soundtrack": "Minecraft: Caves & Cliffs (Original Game Soundtrack)",
         "trackNumber": 2
     },
+    "minecraft:music/game/ancestry": {
+        "name": "Ancestry",
+        "composer": "Lena Raine",
+        "soundtrack": "Minecraft: Caves & Cliffs (Original Game Soundtrack)",
+        "trackNumber": 3
+    },
     "minecraft:music/game/wending": {
         "name": "Wending",
         "composer": "Lena Raine",
@@ -253,5 +259,24 @@
         "composer": "Kumi Tanioka",
         "soundtrack": "Minecraft: Caves & Cliffs (Original Game Soundtrack)",
         "trackNumber": 10
+    },
+
+    "minecraft:music/game/swamp/firebugs": {
+        "name": "Firebugs",
+        "composer": "Lena Raine",
+        "soundtrack": "Minecraft: The Wild Update (Original Game Soundtrack)",
+        "trackNumber": 1
+    },
+    "minecraft:music/game/swamp/aerie": {
+        "name": "Aerie",
+        "composer": "Lena Raine",
+        "soundtrack": "Minecraft: The Wild Update (Original Game Soundtrack)",
+        "trackNumber": 2
+    },
+    "minecraft:music/game/swamp/labyrinthine": {
+        "name": "Labyrinthine",
+        "composer": "Lena Raine",
+        "soundtrack": "Minecraft: The Wild Update (Original Game Soundtrack)",
+        "trackNumber": 3
     }
 }
