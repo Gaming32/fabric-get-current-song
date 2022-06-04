@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.github.gaming32.getcurrentsong.SongNameDatabase.SongInfo;
-import io.github.gaming32.getcurrentsong.mixin.MusicTrackerMixin;
+import io.github.gaming32.getcurrentsong.mixin.MusicTrackerAccessor;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
@@ -108,7 +108,7 @@ public class GetCurrentSongMod implements ModInitializer {
 
     private int getCurrentSongCommandExecutor(CommandContext<FabricClientCommandSource> context, boolean raw) {
         MusicTracker musicTracker = getMusicTracker(context);
-        SoundInstance currentSoundInstance = ((MusicTrackerMixin)musicTracker).getCurrent();
+        SoundInstance currentSoundInstance = ((MusicTrackerAccessor)musicTracker).getCurrent();
         if (currentSoundInstance == null) {
             context.getSource().sendFeedback(Text.of("No song currently playing!"));
             return 0;

@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [],
   "client": [
-    "MusicTrackerMixin",
-    "DebugHudMixin"
+    "MixinDebugHud",
+    "MusicTrackerAccessor"
   ],
   "server": [],
   "injectors": {

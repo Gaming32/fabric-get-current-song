@@ -17,13 +17,13 @@ import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.util.Identifier;
 
 @Mixin(DebugHud.class)
-public class DebugHudMixin {
+public class MixinDebugHud {
     @Inject(method = "getLeftText()Ljava/util/List;", at = @At("RETURN"))
-    protected void getLeftText(CallbackInfoReturnable<List<String>> ci) {
+    private void getLeftText(CallbackInfoReturnable<List<String>> ci) {
         List<String> debugLines = ci.getReturnValue();
         debugLines.add("");
         MusicTracker musicTracker = MinecraftClient.getInstance().getMusicTracker();
-        SoundInstance currentSoundInstance = ((MusicTrackerMixin)musicTracker).getCurrent();
+        SoundInstance currentSoundInstance = ((MusicTrackerAccessor)musicTracker).getCurrent();
         if (currentSoundInstance == null) {
             debugLines.add("Song: No song");
             return;
