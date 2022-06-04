@@ -3,8 +3,6 @@ package io.github.gaming32.getcurrentsong;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 import com.google.gson.JsonObject;
 
 import net.minecraft.util.Identifier;
@@ -12,10 +10,10 @@ import net.minecraft.util.Identifier;
 public final class SongNameDatabase {
     public static final class SongInfo {
         private final String name, composer;
-        @Nullable private final String soundtrack;
+        private final String soundtrack;
         private final int trackNumber;
 
-        public SongInfo(String name, String composer, @Nullable String soundtrack, int trackNumber) {
+        public SongInfo(String name, String composer, String soundtrack, int trackNumber) {
             if ((soundtrack == null) ^ (trackNumber == -1)) {
                 throw new IllegalArgumentException("trackNumber must be -1 if soundtrack is null");
             }
@@ -66,7 +64,6 @@ public final class SongNameDatabase {
             return composer;
         }
 
-        @Nullable
         public String getSoundtrack() {
             return soundtrack;
         }
@@ -112,11 +109,11 @@ public final class SongNameDatabase {
         return initialized;
     }
 
-    public static @Nullable SongInfo getSong(Identifier id) {
+    public static SongInfo getSong(Identifier id) {
         return SONGS.get(id);
     }
 
-    public static @Nullable SongInfo getSong(String id) {
+    public static SongInfo getSong(String id) {
         return SONGS.get(new Identifier(id));
     }
 }

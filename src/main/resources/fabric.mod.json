@@ -26,7 +26,7 @@
     "getcurrentsong.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.12.12",
-    "fabric": "*"
+    "fabricloader": ">=0.14.6",
+    "fabric": ">=0.53.4"
   }
 }
