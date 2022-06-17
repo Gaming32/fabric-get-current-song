@@ -18,6 +18,7 @@ import io.github.gaming32.getcurrentsong.SongNameDatabase.SongInfo;
 import io.github.gaming32.getcurrentsong.mixin.MusicTrackerAccessor;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
@@ -80,25 +81,27 @@ public class GetCurrentSongMod implements ModInitializer {
                 return loadedCount;
             }
         });
-        ClientCommandManager.DISPATCHER.register(
-            ClientCommandManager.literal("getsong")
-                .executes(context -> this.getCurrentSongCommandExecutor(context, false))
-        );
-        ClientCommandManager.DISPATCHER.register(
-            ClientCommandManager.literal("getsongid")
-                .executes(context -> this.getCurrentSongCommandExecutor(context, true))
-        );
-        ClientCommandManager.DISPATCHER.register(
-            // Simple helper command for testing
-            ClientCommandManager.literal("forceplaysong")
-                .executes(context -> {
-                    MusicTracker musicTracker = getMusicTracker(context);
-                    MusicSound musicSound = context.getSource().getClient().getMusicType();
-                    musicTracker.play(musicSound);
-                    context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().getId()));
-                    return 0;
-                })
-        );
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+            dispatcher.register(
+                ClientCommandManager.literal("getsong")
+                    .executes(context -> this.getCurrentSongCommandExecutor(context, false))
+            );
+            dispatcher.register(
+                ClientCommandManager.literal("getsongid")
+                    .executes(context -> this.getCurrentSongCommandExecutor(context, true))
+            );
+            dispatcher.register(
+                // Simple helper command for testing
+                ClientCommandManager.literal("forceplaysong")
+                    .executes(context -> {
+                        MusicTracker musicTracker = getMusicTracker(context);
+                        MusicSound musicSound = context.getSource().getClient().getMusicType();
+                        musicTracker.play(musicSound);
+                        context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().getId()));
+                        return 0;
+                    })
+            );
+        });
         LOGGER.info("Initialized");
     }
 
