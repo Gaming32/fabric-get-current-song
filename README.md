@@ -48,7 +48,7 @@ repositories {
 }
 
 dependencies {
-    modApi "maven.modrinth:getcurrentsong:1.0.1"
+    modApi "maven.modrinth:getcurrentsong:1.0.3"
 }
 ```
 
