@@ -67,7 +67,7 @@ public class GetCurrentSongMod implements ModInitializer {
                 for (Resource resource : songNamesResources) {
                     try (
                         InputStream is = resource.getInputStream();
-                        Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
+                        Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8)
                     ) {
                         JsonObject jsonObject = JsonHelper.deserialize(reader);
                         for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
@@ -97,7 +97,7 @@ public class GetCurrentSongMod implements ModInitializer {
                         MusicTracker musicTracker = getMusicTracker(context);
                         MusicSound musicSound = context.getSource().getClient().getMusicType();
                         musicTracker.play(musicSound);
-                        context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().getId()));
+                        context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().value()));
                         return 0;
                     })
             );
