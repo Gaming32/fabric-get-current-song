@@ -97,7 +97,7 @@ public class GetCurrentSongMod implements ModInitializer {
                         MusicTracker musicTracker = getMusicTracker(context);
                         MusicSound musicSound = context.getSource().getClient().getMusicType();
                         musicTracker.play(musicSound);
-                        context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().value()));
+                        context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().value().getId()));
                         return 0;
                     })
             );
