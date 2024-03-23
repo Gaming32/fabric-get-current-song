@@ -1,19 +1,8 @@
 package io.github.gaming32.getcurrentsong;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.context.CommandContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import io.github.gaming32.getcurrentsong.SongNameDatabase.SongInfo;
 import io.github.gaming32.getcurrentsong.mixin.MusicTrackerAccessor;
 import net.fabricmc.api.ModInitializer;
@@ -32,6 +21,16 @@ import net.minecraft.sound.MusicSound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 
 public class GetCurrentSongMod implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("getcurrentsong");
@@ -66,14 +65,14 @@ public class GetCurrentSongMod implements ModInitializer {
                 List<Resource> songNamesResources = manager.getAllResources(SONG_NAMES_JSON);
                 for (Resource resource : songNamesResources) {
                     try (
-                        InputStream is = resource.getInputStream();
-                        Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8)
+                            InputStream is = resource.getInputStream();
+                            Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8)
                     ) {
                         JsonObject jsonObject = JsonHelper.deserialize(reader);
                         for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
                             if (SongNameDatabase.putSong(
-                                new Identifier(entry.getKey()),
-                                new SongInfo(entry.getValue().getAsJsonObject())
+                                    new Identifier(entry.getKey()),
+                                    new SongInfo(entry.getValue().getAsJsonObject())
                             ) == null) loadedCount++;
                         }
                     }
@@ -83,23 +82,23 @@ public class GetCurrentSongMod implements ModInitializer {
         });
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             dispatcher.register(
-                ClientCommandManager.literal("getsong")
-                    .executes(context -> this.getCurrentSongCommandExecutor(context, false))
+                    ClientCommandManager.literal("getsong")
+                            .executes(context -> this.getCurrentSongCommandExecutor(context, false))
             );
             dispatcher.register(
-                ClientCommandManager.literal("getsongid")
-                    .executes(context -> this.getCurrentSongCommandExecutor(context, true))
+                    ClientCommandManager.literal("getsongid")
+                            .executes(context -> this.getCurrentSongCommandExecutor(context, true))
             );
             dispatcher.register(
-                // Simple helper command for testing
-                ClientCommandManager.literal("forceplaysong")
-                    .executes(context -> {
-                        MusicTracker musicTracker = getMusicTracker(context);
-                        MusicSound musicSound = context.getSource().getClient().getMusicType();
-                        musicTracker.play(musicSound);
-                        context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().value().getId()));
-                        return 0;
-                    })
+                    // Simple helper command for testing
+                    ClientCommandManager.literal("forceplaysong")
+                            .executes(context -> {
+                                MusicTracker musicTracker = getMusicTracker(context);
+                                MusicSound musicSound = context.getSource().getClient().getMusicType();
+                                musicTracker.play(musicSound);
+                                context.getSource().sendFeedback(Text.of("Now playing song from " + musicSound.getSound().value().getId()));
+                                return 0;
+                            })
             );
         });
         LOGGER.info("Initialized");
@@ -111,7 +110,7 @@ public class GetCurrentSongMod implements ModInitializer {
 
     private int getCurrentSongCommandExecutor(CommandContext<FabricClientCommandSource> context, boolean raw) {
         MusicTracker musicTracker = getMusicTracker(context);
-        SoundInstance currentSoundInstance = ((MusicTrackerAccessor)musicTracker).getCurrent();
+        SoundInstance currentSoundInstance = ((MusicTrackerAccessor) musicTracker).getCurrent();
         if (currentSoundInstance == null) {
             context.getSource().sendFeedback(Text.of("No song currently playing!"));
             return 0;
